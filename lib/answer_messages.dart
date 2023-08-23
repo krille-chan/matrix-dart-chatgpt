@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:matrix/matrix.dart';
 import 'package:matrix_dart_chatgpt/config.dart';
@@ -7,9 +9,13 @@ void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
 
   final prompt = config.introductionPrompt;
 
+  const int messageCount = 60;
+  const int maxMessageLength = 50;
+
   final timeline = await event.room.getTimeline();
   try {
-    await timeline.requestHistory(historyCount: 100);
+    await timeline.requestHistory(
+        historyCount: messageCount - Room.defaultHistoryCount);
   } catch (e, s) {
     Logs().w('Unable to request history in room ${event.roomId}', e, s);
   }
@@ -17,13 +23,20 @@ void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
   final messages = timeline.events
       .where((event) =>
           event.type == EventTypes.Message &&
-          event.messageType == MessageTypes.Text)
+          event.messageType == MessageTypes.Text &&
+          !event.redacted)
       .map(
         (event) => Messages(
           role: event.senderId == event.room.client.userID
               ? Role.assistant
               : Role.user,
-          content: event.body,
+          content: event.body.substring(
+            0,
+            max(
+              maxMessageLength,
+              event.body.length,
+            ),
+          ),
         ),
       )
       .toList()
