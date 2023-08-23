@@ -9,16 +9,9 @@ void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
 
   final prompt = config.introductionPrompt;
 
-  const int messageCount = 60;
-  const int maxMessageLength = 50;
+  const int maxMessageLength = 1000;
 
   final timeline = await event.room.getTimeline();
-  try {
-    await timeline.requestHistory(
-        historyCount: messageCount - Room.defaultHistoryCount);
-  } catch (e, s) {
-    Logs().w('Unable to request history in room ${event.roomId}', e, s);
-  }
 
   final messages = timeline.events
       .where((event) =>
