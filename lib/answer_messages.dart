@@ -32,7 +32,7 @@ void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
               : Role.user,
           content: event.body.substring(
             0,
-            max(
+            min(
               maxMessageLength,
               event.body.length,
             ),
