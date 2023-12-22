@@ -15,6 +15,7 @@ Future<Client> connectMatrixClient(BotConfig config) async {
     },
     logLevel: config.logLevel,
   );
+  client.syncPresence = PresenceType.offline;
 
   await client.init();
 

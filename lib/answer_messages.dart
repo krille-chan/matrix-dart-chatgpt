@@ -5,6 +5,7 @@ import 'package:matrix/matrix.dart';
 import 'package:matrix_dart_chatgpt/config.dart';
 
 void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
+  event.room.client.syncPresence = PresenceType.online;
   await event.room.setTyping(true);
 
   final prompt = config.introductionPrompt;
@@ -60,6 +61,7 @@ void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
   } catch (e) {
     await event.room.sendTextEvent('Error: $e');
   } finally {
+    event.room.client.syncPresence = PresenceType.offline;
     await event.room.setTyping(false);
     timeline.cancelSubscriptions();
   }
