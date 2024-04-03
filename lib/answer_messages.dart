@@ -47,7 +47,7 @@ void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
               content: prompt,
             ),
           ...messages,
-        ],
+        ].map((message) => message.toJson()).toList(),
         model: GptTurboChatModel(),
         user: event.roomId,
         temperature: 1,

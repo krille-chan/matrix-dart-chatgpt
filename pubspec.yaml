@@ -7,10 +7,10 @@ environment:
   sdk: ^3.1.0
 
 dependencies:
-  chat_gpt_sdk: ^2.2.8
+  chat_gpt_sdk: ^3.0.4
   flutter_olm: ^1.2.0
   flutter_openssl_crypto: ^0.1.0
-  matrix: ^0.25.0
+  matrix: ^0.26.1
 
 dev_dependencies:
   lints: ^2.0.0
