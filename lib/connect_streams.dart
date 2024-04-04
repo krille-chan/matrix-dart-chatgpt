@@ -11,7 +11,8 @@ extension ConnectStreams on Client {
             config.allowList.any((allowRegex) =>
                 RegExp(allowRegex).hasMatch(eventUpdate.content['sender'])) &&
             eventUpdate.content['type'] == EventTypes.Message &&
-            eventUpdate.content['content']['msgtype'] == MessageTypes.Text)
+            eventUpdate.content['content']['msgtype'] == MessageTypes.Text &&
+            eventUpdate.content['sender'] != userID)
         .listen(
           (eventUpdate) => answerMessage(
             Event.fromJson(
@@ -29,7 +30,8 @@ extension ConnectStreams on Client {
             config.allowList.any((allowRegex) =>
                 RegExp(allowRegex).hasMatch(eventUpdate.content['sender'])) &&
             eventUpdate.content['type'] == EventTypes.RoomMember &&
-            eventUpdate.content['state_key'] == userID)
+            eventUpdate.content['state_key'] == userID &&
+            eventUpdate.content['sender'] != userID)
         .listen(
           (eventUpdate) => getRoomById(eventUpdate.roomID)!.join(),
         );
