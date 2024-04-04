@@ -8,7 +8,8 @@ extension ConnectStreams on Client {
     onEvent.stream
         .where((eventUpdate) =>
             eventUpdate.type == EventUpdateType.timeline &&
-            config.allowList.contains(eventUpdate.content['sender']) &&
+            config.allowList.any((allowRegex) =>
+                RegExp(allowRegex).hasMatch(eventUpdate.content['sender'])) &&
             eventUpdate.content['type'] == EventTypes.Message &&
             eventUpdate.content['content']['msgtype'] == MessageTypes.Text)
         .listen(
