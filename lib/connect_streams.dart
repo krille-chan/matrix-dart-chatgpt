@@ -26,7 +26,8 @@ extension ConnectStreams on Client {
     onEvent.stream
         .where((eventUpdate) =>
             eventUpdate.type == EventUpdateType.inviteState &&
-            config.allowList.contains(eventUpdate.content['sender']) &&
+            config.allowList.any((allowRegex) =>
+                RegExp(allowRegex).hasMatch(eventUpdate.content['sender'])) &&
             eventUpdate.content['type'] == EventTypes.RoomMember &&
             eventUpdate.content['state_key'] == userID)
         .listen(
