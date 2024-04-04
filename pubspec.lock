@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.2"
+  asn1lib:
+    dependency: transitive
+    description:
+      name: asn1lib
+      sha256: c9c85fedbe2188b95133cbe960e16f5f448860f7133330e272edbbca5893ddc6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.2"
   async:
     dependency: transitive
     description:
@@ -121,6 +129,23 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  crypto_keys:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "474f424ac9d90b92ab4542923d2fd16478c0fe65"
+      url: "https://github.com/famedly/crypto_keys.git"
+    source: git
+    version: "0.3.0+1"
+  cryptography:
+    dependency: transitive
+    description:
+      name: cryptography
+      sha256: d146b76d33d94548cf035233fbc2f4338c1242fa119013bead807d033fc4ae05
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
   csslib:
     dependency: transitive
     description:
@@ -153,6 +178,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  fhir:
+    dependency: transitive
+    description:
+      name: fhir
+      sha256: fa4f739a3aa52d7817a098e50bf9e7e7159c1c85159baf08b03ce0e5c64be4cd
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.11.4"
   file:
     dependency: transitive
     description:
@@ -161,6 +194,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter:
     dependency: transitive
     description: flutter
@@ -182,6 +223,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: c3fd9336eb55a38cc1bbd79ab17573113a8deccd0ecbbf926cca3c62803b5c2d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -223,7 +272,7 @@ packages:
     source: hosted
     version: "2.0.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "761a297c042deedc1ffbb156d6e2af13886bb305c2a343a4d972504cd67dd938"
@@ -262,6 +311,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  jose:
+    dependency: transitive
+    description:
+      path: "."
+      ref: "9068f50b737c3981534f935bb06c4e17485e99c7"
+      resolved-ref: "9068f50b737c3981534f935bb06c4e17485e99c7"
+      url: "https://github.com/famedly/jose.git"
+    source: git
+    version: "0.3.4"
   js:
     dependency: transitive
     description:
@@ -270,6 +328,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.1"
   lints:
     dependency: "direct dev"
     description:
@@ -470,6 +536,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
   random_string:
     dependency: transitive
     description:
@@ -555,6 +629,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   sqflite_common:
     dependency: transitive
     description:
@@ -635,6 +717,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.0"
+  ti_messenger_client_sdk:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "v0.2.1"
+      resolved-ref: "308c4a5a599a1173267b54e74b51418b54247409"
+      url: "git@github.com:famedly/ti-messenger-client-sdk.git"
+    source: git
+    version: "0.2.1"
   typed_data:
     dependency: transitive
     description:
@@ -651,6 +742,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      sha256: cd210a09f7c18cbe5a02511718e0334de6559871052c90a90c0cca46a4aa81c8
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.3"
   vector_math:
     dependency: transitive
     description:
@@ -715,6 +814,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
+  x509:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "0c2631bd7273d04012f723ae337c1f67ba4d0d4d"
+      url: "https://github.com/famedly/x509.git"
+    source: git
+    version: "0.2.4"
   xdg_directories:
     dependency: transitive
     description:
@@ -731,6 +839,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.5.0"
+  xml2json:
+    dependency: transitive
+    description:
+      name: xml2json
+      sha256: "52b7c8d350fdce09545b058982c26689ee89f1eb188cc9910d585665bfe27bc0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.3"
   yaml:
     dependency: transitive
     description:

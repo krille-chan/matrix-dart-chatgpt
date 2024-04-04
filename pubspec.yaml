@@ -10,7 +10,12 @@ dependencies:
   chat_gpt_sdk: ^3.0.4
   flutter_olm: ^1.2.0
   flutter_openssl_crypto: ^0.1.0
+  http: ^1.2.1
   matrix: ^0.26.1
+  ti_messenger_client_sdk:
+    git:
+      url: git@github.com:famedly/ti-messenger-client-sdk.git
+      ref: v0.2.1
 
 dev_dependencies:
   lints: ^2.0.0

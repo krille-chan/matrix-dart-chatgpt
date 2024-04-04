@@ -5,7 +5,7 @@ import 'package:matrix/matrix.dart';
 
 class BotConfig {
   final String matrixId;
-  final String password;
+  final String token;
   final String homeserver;
   final String openAiKey;
   final String? displayname;
@@ -15,7 +15,7 @@ class BotConfig {
 
   const BotConfig({
     required this.matrixId,
-    required this.password,
+    required this.token,
     required this.homeserver,
     required this.openAiKey,
     this.displayname,
@@ -26,7 +26,7 @@ class BotConfig {
 
   factory BotConfig.fromJson(Map json) => BotConfig(
         matrixId: json['matrixId'],
-        password: json['password'],
+        token: json['token'],
         homeserver: json['homeserver'],
         openAiKey: json['openAiKey'],
         displayname: json['displayname'],
