@@ -8,8 +8,6 @@ extension ConnectStreams on Client {
     onEvent.stream
         .where((eventUpdate) =>
             eventUpdate.type == EventUpdateType.timeline &&
-            config.allowList.any((allowRegex) =>
-                RegExp(allowRegex).hasMatch(eventUpdate.content['sender'])) &&
             eventUpdate.content['type'] == EventTypes.Message &&
             eventUpdate.content['content']['msgtype'] == MessageTypes.Text &&
             eventUpdate.content['sender'] != userID)
@@ -27,13 +25,20 @@ extension ConnectStreams on Client {
     onEvent.stream
         .where((eventUpdate) =>
             eventUpdate.type == EventUpdateType.inviteState &&
-            config.allowList.any((allowRegex) =>
-                RegExp(allowRegex).hasMatch(eventUpdate.content['sender'])) &&
             eventUpdate.content['type'] == EventTypes.RoomMember &&
             eventUpdate.content['state_key'] == userID &&
             eventUpdate.content['sender'] != userID)
         .listen(
-          (eventUpdate) => getRoomById(eventUpdate.roomID)!.join(),
-        );
+      (eventUpdate) {
+        final sender = eventUpdate.content['sender'] as String;
+        Logs().i('Received invite from $sender');
+        if (!config.allowList
+            .any((allowRegex) => RegExp(allowRegex).hasMatch(sender))) {
+          Logs().w('$sender is not in allow list! Ignoring invite.');
+          return;
+        }
+        getRoomById(eventUpdate.roomID)!.join();
+      },
+    );
   }
 }

@@ -5,6 +5,13 @@ import 'package:matrix/matrix.dart';
 import 'package:matrix_dart_chatgpt/config.dart';
 
 void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
+  Logs().i('Received new message from ${event.senderId}');
+  if (!config.allowList
+      .any((allowRegex) => RegExp(allowRegex).hasMatch(event.senderId))) {
+    Logs().w('${event.senderId} is not in allow list! Ignoring message.');
+    return;
+  }
+
   event.room.client.syncPresence = PresenceType.online;
   await event.room.setTyping(true);
 

@@ -14,6 +14,7 @@ void main(List<String> arguments) async {
   );
 
   final client = await connectMatrixClient(config);
+  Logs().level = Level.verbose;
   client.connectChatGPTStreams(config, openAI);
 
   Logs().i(
