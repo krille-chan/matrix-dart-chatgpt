@@ -218,10 +218,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_openssl_crypto
-      sha256: b64a0825d79f10b6d5f5951f7ce2d5ddc12ed532129fc5a7e0ce472f5b97d78e
+      sha256: "293b4fcda13ab0710645a16e82f3d5b7de19bfc0ab2d06bcdb87637222eda5e1"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "0.5.0"
   flutter_rust_bridge:
     dependency: transitive
     description:
@@ -378,10 +378,10 @@ packages:
     dependency: transitive
     description:
       name: mime
-      sha256: "801fd0b26f14a4a58ccb09d5892c3fbdeff209594300a542492cf13fba9d247a"
+      sha256: "41a20518f0cb1256669420fdba0cd90d21561e560ac240f26ef8322e45bb7ed6"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.6"
+    version: "2.0.0"
   node_preamble:
     dependency: transitive
     description:
