@@ -5,6 +5,9 @@ on:
     types:
       - created
 
+permissions:
+  contents: write
+
 concurrency:
   group: release_workflow
   cancel-in-progress: true
@@ -43,11 +46,6 @@ jobs:
           name: Web Build
           path: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
       - name: Upload to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
-          asset_name: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
-          asset_content_type: application/gzip
+          files: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
