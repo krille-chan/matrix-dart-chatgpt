@@ -24,11 +24,15 @@ Future<Client> connectMatrixClient(BotConfig config) async {
 
   if (!client.isLogged()) {
     await client.checkHomeserver(Uri.parse(config.homeserver));
+
     await client.login(
-      LoginType.mLoginPassword,
+      config.password != null
+          ? LoginType.mLoginPassword
+          : 'com.famedly.login.token.oidc',
       initialDeviceDisplayName: config.displayname,
       identifier: AuthenticationUserIdentifier(user: config.matrixId),
       password: config.password,
+      token: config.accessToken,
     );
 
     final passphrase = config.passphrase;

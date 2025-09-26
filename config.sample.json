@@ -1,6 +1,7 @@
 {
     "matrixId": "<Your Matrix ID here>",
     "password": "<Your Password here>",
+    "accessToken": null,
     "homeserver": "https://matrix.org",
     "openAiKey": "<Your OpenAI key here>",
     "displayname": null,

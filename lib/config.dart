@@ -5,7 +5,8 @@ import 'package:matrix/matrix.dart';
 
 class BotConfig {
   final String matrixId;
-  final String password;
+  final String? password;
+  final String? accessToken;
   final String homeserver;
   final String openAiKey;
   final String? displayname;
@@ -24,6 +25,7 @@ class BotConfig {
     required this.logLevel,
     required this.allowList,
     required this.passphrase,
+    required this.accessToken,
   });
 
   factory BotConfig.fromJson(Map json) => BotConfig(
@@ -38,6 +40,7 @@ class BotConfig {
         allowList: List<String>.from(json['allowList']),
         introductionPrompt: json['introductionPrompt'],
         passphrase: json['passphrase'],
+        accessToken: json['accessToken'],
       );
 
   factory BotConfig.fromFile(String path) {
