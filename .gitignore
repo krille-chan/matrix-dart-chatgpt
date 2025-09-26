@@ -3,3 +3,5 @@
 .dart_tool/
 config.json
 database/
+build
+.DS_Store

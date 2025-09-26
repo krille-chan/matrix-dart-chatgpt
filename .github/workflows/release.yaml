@@ -1,0 +1,53 @@
+name: Build Releases
+
+on:
+  release:
+    types:
+      - created
+
+concurrency:
+  group: release_workflow
+  cancel-in-progress: true
+
+jobs:
+  build_linux:
+    strategy:
+      matrix:
+        arch: [ x64, arm64 ]
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-latest'}}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dart-lang/setup-dart@v1
+      - uses: moonrepo/setup-rust@v1
+      - run: dart pub get
+      - run: mkdir build
+      - run: cp config.sample.json ./build/config.json
+      - name: Compile vodozemac
+        working-directory: build
+        run: |
+          git clone https://github.com/famedly/dart-vodozemac.git
+          mv ./dart-vodozemac/rust ./
+          rm -rf dart-vodozemac
+          cd ./rust
+          cargo build --release
+          cd ..
+          mv ./rust/target ./vod
+          rm -rf rust
+      - name: Compile Matrix Dart ChatGPT Bot
+        run: dart compile exe ./bin/matrix_dart_chatgpt.dart --output ./build/matrix_dart_chatgpt.exe
+      - name: Create archive
+        run: tar -czf matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz build/
+      - name: Upload Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Web Build
+          path: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
+      - name: Upload to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
+          asset_name: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
+          asset_content_type: application/gzip

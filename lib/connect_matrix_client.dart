@@ -5,10 +5,7 @@ import 'package:vodozemac/vodozemac.dart' as vod;
 import 'package:matrix_dart_chatgpt/config.dart';
 
 Future<Client> connectMatrixClient(BotConfig config) async {
-  await vod.init(
-    wasmPath: './pkg/',
-    libraryPath: './rust/target/debug/',
-  );
+  await vod.init(libraryPath: './vod/release/');
   final client = Client(
     'matrix_dart_chatgpt',
     database: await MatrixSdkDatabase.init(
