@@ -1,18 +1,21 @@
-import 'dart:io';
-
 import 'package:matrix/matrix.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:vodozemac/vodozemac.dart' as vod;
+
 import 'package:matrix_dart_chatgpt/config.dart';
 
 Future<Client> connectMatrixClient(BotConfig config) async {
+  await vod.init(
+    wasmPath: './pkg/',
+    libraryPath: './rust/target/debug/',
+  );
   final client = Client(
     'matrix_dart_chatgpt',
-    databaseBuilder: (_) async {
-      final directory = Directory('./database/hive');
-      await directory.create(recursive: true);
-      final db = HiveCollectionsDatabase('matrix_example_chat', directory.path);
-      await db.open();
-      return db;
-    },
+    database: await MatrixSdkDatabase.init(
+      '<Database Name>',
+      database: await databaseFactoryFfi.openDatabase('./matrix.sqlite'),
+      sqfliteFactory: databaseFactoryFfi,
+    ),
     logLevel: config.logLevel,
   );
   client.syncPresence = PresenceType.offline;

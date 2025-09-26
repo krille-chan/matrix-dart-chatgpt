@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
-import 'package:matrix/matrix.dart';
+import 'package:matrix/matrix.dart' hide Role;
+
 import 'package:matrix_dart_chatgpt/config.dart';
 
 void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
@@ -52,9 +53,9 @@ void answerMessage(Event event, OpenAI openAI, BotConfig config) async {
             Messages(
               role: Role.system,
               content: prompt,
-            ),
-          ...messages,
-        ].map((message) => message.toJson()).toList(),
+            ).toJson(),
+          ...messages.map((m) => m.toJson()),
+        ],
         model: GptTurboChatModel(),
         user: event.roomId,
         temperature: 1,

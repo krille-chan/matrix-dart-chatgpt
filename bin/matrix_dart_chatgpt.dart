@@ -1,5 +1,6 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:matrix/matrix.dart';
+
 import 'package:matrix_dart_chatgpt/config.dart';
 import 'package:matrix_dart_chatgpt/connect_matrix_client.dart';
 import 'package:matrix_dart_chatgpt/connect_streams.dart';
