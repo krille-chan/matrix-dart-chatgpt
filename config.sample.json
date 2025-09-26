@@ -5,5 +5,6 @@
     "openAiKey": "<Your OpenAI key here>",
     "displayname": null,
     "introductionPrompt": null,
-    "allowList": []
+    "allowList": [],
+    "passphrase": null
 }

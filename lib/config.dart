@@ -10,6 +10,7 @@ class BotConfig {
   final String openAiKey;
   final String? displayname;
   final String? introductionPrompt;
+  final String? passphrase;
   final Level logLevel;
   final List<String> allowList;
 
@@ -22,6 +23,7 @@ class BotConfig {
     this.introductionPrompt,
     required this.logLevel,
     required this.allowList,
+    required this.passphrase,
   });
 
   factory BotConfig.fromJson(Map json) => BotConfig(
@@ -35,6 +37,7 @@ class BotConfig {
         ),
         allowList: List<String>.from(json['allowList']),
         introductionPrompt: json['introductionPrompt'],
+        passphrase: json['passphrase'],
       );
 
   factory BotConfig.fromFile(String path) {
