@@ -30,61 +30,61 @@ Future<Client> connectMatrixClient(BotConfig config) async {
       identifier: AuthenticationUserIdentifier(user: config.matrixId),
       password: config.password,
     );
+
+    final passphrase = config.passphrase;
+    final completer = Completer();
+    client.encryption?.bootstrap(onUpdate: (bootstrap) async {
+      final wipe = passphrase == null;
+      switch (bootstrap.state) {
+        case BootstrapState.loading:
+          return;
+        case BootstrapState.askWipeSsss:
+          bootstrap.wipeSsss(wipe);
+          return;
+        case BootstrapState.askUseExistingSsss:
+          bootstrap.useExistingSsss(!wipe);
+          return;
+        case BootstrapState.askUnlockSsss:
+          bootstrap.unlockedSsss();
+          return;
+        case BootstrapState.askBadSsss:
+          bootstrap.ignoreBadSecrets(true);
+          return;
+        case BootstrapState.askNewSsss:
+          bootstrap.newSsss(passphrase);
+          return;
+        case BootstrapState.openExistingSsss:
+          await bootstrap.newSsssKey!.unlock(keyOrPassphrase: passphrase);
+          await bootstrap.openExistingSsss();
+          await bootstrap.client.encryption!.crossSigning
+              .selfSign(recoveryKey: passphrase);
+          return;
+        case BootstrapState.askWipeCrossSigning:
+          bootstrap.wipeCrossSigning(wipe);
+          return;
+        case BootstrapState.askSetupCrossSigning:
+          bootstrap.askSetupCrossSigning(
+            setupMasterKey: true,
+            setupSelfSigningKey: true,
+            setupUserSigningKey: true,
+          );
+        case BootstrapState.askWipeOnlineKeyBackup:
+          bootstrap.wipeOnlineKeyBackup(wipe);
+          return;
+        case BootstrapState.askSetupOnlineKeyBackup:
+          bootstrap.askSetupOnlineKeyBackup(true);
+          return;
+        case BootstrapState.error:
+          completer.completeError(bootstrap);
+          return;
+        case BootstrapState.done:
+          completer.complete();
+          return;
+      }
+    });
+
+    await completer.future;
   }
-
-  final passphrase = config.passphrase;
-  final completer = Completer();
-  client.encryption?.bootstrap(onUpdate: (bootstrap) async {
-    final wipe = passphrase == null;
-    switch (bootstrap.state) {
-      case BootstrapState.loading:
-        return;
-      case BootstrapState.askWipeSsss:
-        bootstrap.wipeSsss(wipe);
-        return;
-      case BootstrapState.askUseExistingSsss:
-        bootstrap.useExistingSsss(!wipe);
-        return;
-      case BootstrapState.askUnlockSsss:
-        bootstrap.unlockedSsss();
-        return;
-      case BootstrapState.askBadSsss:
-        bootstrap.ignoreBadSecrets(true);
-        return;
-      case BootstrapState.askNewSsss:
-        bootstrap.newSsss(passphrase);
-        return;
-      case BootstrapState.openExistingSsss:
-        await bootstrap.newSsssKey!.unlock(keyOrPassphrase: passphrase);
-        await bootstrap.openExistingSsss();
-        await bootstrap.client.encryption!.crossSigning
-            .selfSign(recoveryKey: passphrase);
-        return;
-      case BootstrapState.askWipeCrossSigning:
-        bootstrap.wipeCrossSigning(wipe);
-        return;
-      case BootstrapState.askSetupCrossSigning:
-        bootstrap.askSetupCrossSigning(
-          setupMasterKey: true,
-          setupSelfSigningKey: true,
-          setupUserSigningKey: true,
-        );
-      case BootstrapState.askWipeOnlineKeyBackup:
-        bootstrap.wipeOnlineKeyBackup(wipe);
-        return;
-      case BootstrapState.askSetupOnlineKeyBackup:
-        bootstrap.askSetupOnlineKeyBackup(true);
-        return;
-      case BootstrapState.error:
-        completer.completeError(bootstrap);
-        return;
-      case BootstrapState.done:
-        completer.complete();
-        return;
-    }
-  });
-
-  await completer.future;
 
   return client;
 }
