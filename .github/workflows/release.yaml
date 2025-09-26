@@ -40,11 +40,6 @@ jobs:
         run: dart compile exe ./bin/matrix_dart_chatgpt.dart --output ./build/matrix_dart_chatgpt.exe
       - name: Create archive
         run: tar -czf matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz build/
-      - name: Upload Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: Web Build
-          path: matrix_dart_chatgpt_${{ matrix.arch }}.tar.gz
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
